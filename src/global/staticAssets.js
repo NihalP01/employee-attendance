@@ -6,6 +6,8 @@ import { SearchOutlined } from '@mui/icons-material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import EditNoteIcon from '@mui/icons-material/EditNote';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+
 const [
   DASHBOARD_ICON,
   EMPLOYEE_ICON,
@@ -15,6 +17,7 @@ const [
   ADD_ICON,
   REMOVE_ICON,
   EDIT_NOTE_ICON,
+  PAYMENT_ICON,
 ] = [
   DashboardIcon,
   EngineeringIcon,
@@ -24,6 +27,7 @@ const [
   AddIcon,
   RemoveIcon,
   EditNoteIcon,
+  CurrencyRupeeIcon,
 ];
 
 export const STATIC_ASSETS = {
@@ -34,5 +38,6 @@ export const STATIC_ASSETS = {
   SEARCH_ICON,
   ADD_ICON,
   REMOVE_ICON,
-  EDIT_NOTE_ICON
+  EDIT_NOTE_ICON,
+  PAYMENT_ICON,
 };

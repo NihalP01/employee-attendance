@@ -1,9 +1,10 @@
 import { Box, Paper, styled } from '@mui/material';
 
-export const CardWrapper = styled(Box)(() => ({
+export const CardWrapper = styled(Box)(({ backgroundcolor }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  backgroundColor: backgroundcolor ? backgroundcolor : '',
   justifyContent: 'center',
   padding: '2rem',
   cursor: 'pointer',

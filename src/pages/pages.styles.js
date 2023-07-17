@@ -6,9 +6,7 @@ export const AttendanceWrapper = styled(Box)(() => ({}));
 
 export const EmployeeWrapper = styled(Box)(() => ({}));
 
-export const ManageWrapper = styled(Box)(() => ({
-
-}));
+export const ManageWrapper = styled(Box)(() => ({}));
 
 export const HeadingWrapper = styled(Box)(() => ({
   display: 'flex',
@@ -31,10 +29,8 @@ export const SearchBox = styled(Box)({
   justifyContent: 'center',
 });
 
-export const ButtonBox = styled(Box)(()=> ({
-  
-}))
+export const ButtonBox = styled(Box)(() => ({}));
 
 export const ManageBox = styled(Grid)(() => ({
-  marginTop: '4rem',
+  marginTop: '0.5rem',
 }));
