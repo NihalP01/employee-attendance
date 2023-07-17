@@ -31,9 +31,6 @@ const CustomList = () => {
       <Grid item xs={2}>
         <Controls.BaseTextField label="time" />
       </Grid>
-      <Grid item xs={2}>
-        <Controls.BaseButton text="Submit" />
-      </Grid>
     </GridWrapper>
   );
 };

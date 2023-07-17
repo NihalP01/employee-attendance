@@ -4,6 +4,8 @@ import Attendance from './pages/Attendance';
 import Layout from './layout/Layout';
 
 import './App.css';
+import Employees from './pages/Employees';
+import Manage from './pages/Manage';
 function App() {
   return (
     <div className="App">
@@ -12,6 +14,8 @@ function App() {
           <Routes>
             <Route index element={<Dashboard />} />
             <Route path="/attendance" element={<Attendance />} />
+            <Route path="/employees" element={<Employees />} />
+            <Route path="/manage" element={<Manage />} />
           </Routes>
         </Layout>
       </BrowserRouter>

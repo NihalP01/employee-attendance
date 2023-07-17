@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Box,
+  Box,  
   TableBody,
   TableCell,
   TableHead,
@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import { StyledTableRow, TableBox } from './table.styles';
 import { tableHeader, tableRows } from '../../constants/tableConst';
+import { Controls } from '../controls';
 
 const EmployeeTable = () => {
   return (
@@ -18,6 +19,7 @@ const EmployeeTable = () => {
             {tableHeader.map((item) => (
               <TableCell key={item.id}>{item.value}</TableCell>
             ))}
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -28,6 +30,7 @@ const EmployeeTable = () => {
               <TableCell>{item.absentDays}</TableCell>
               <TableCell>{item.totalWorked}</TableCell>
               <TableCell>{item.payableAmount}</TableCell>
+              <TableCell><Controls.BaseButton text="View Details" /></TableCell>
             </StyledTableRow>
           ))}
         </TableBody>

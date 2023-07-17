@@ -63,3 +63,39 @@ export const tableRows = [
     payableAmount: '$190',
   },
 ];
+
+export const employeeListTableHeader = [
+  {
+    id: 0,
+    value: 'Name',
+  },
+  {
+    id: 2,
+    value: 'Address',
+  },
+  {
+    id: 3,
+    value: 'Phonen Number',
+  },
+];
+
+export const employeesListTableRows = [
+  {
+    id: 0,
+    name: 'Nihal Buragohain',
+    address: 'Panibil, Sibsagar',
+    phoneNumber: '7002028029',
+  },
+  {
+    id: 2,
+    name: 'Nihal Buragohain',
+    address: 'Panibil, Sibsagar',
+    phoneNumber: '7002028029',
+  },
+  {
+    id: 3,
+    name: 'Nihal Buragohain',
+    address: 'Panibil, Sibsagar',
+    phoneNumber: '7002028029',
+  },
+];
