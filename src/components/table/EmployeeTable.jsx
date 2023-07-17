@@ -1,16 +1,18 @@
-import React from 'react';
-import {
-  Box,  
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from '@mui/material';
+import React, { useState } from 'react';
+import { Box, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { StyledTableRow, TableBox } from './table.styles';
 import { tableHeader, tableRows } from '../../constants/tableConst';
 import { Controls } from '../controls';
+import { Components } from '..';
+import AttendanceChart from '../attendanceChart/AttendanceChart';
 
 const EmployeeTable = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
   return (
     <Box mt={6}>
       <TableBox>
@@ -30,11 +32,24 @@ const EmployeeTable = () => {
               <TableCell>{item.absentDays}</TableCell>
               <TableCell>{item.totalWorked}</TableCell>
               <TableCell>{item.payableAmount}</TableCell>
-              <TableCell><Controls.BaseButton text="View Details" /></TableCell>
+              <TableCell>
+                <Controls.BaseButton
+                  onClick={handleClick}
+                  text="View Details"
+                />
+              </TableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </TableBox>
+
+      <Components.CustomDialog
+        open={open}
+        title="Employee name"
+        setOpen={setOpen}
+      >
+        <AttendanceChart />
+      </Components.CustomDialog>
     </Box>
   );
 };
