@@ -25,6 +25,7 @@ const EmployeeListTable = () => {
         {employeesListTableRows.map((item) => (
           <TableRow key={item.id}>
             <TableCell>{item.name}</TableCell>
+            <TableCell>{item.designation}</TableCell>
             <TableCell>{item.address}</TableCell>
             <TableCell>{item.phoneNumber}</TableCell>
           </TableRow>

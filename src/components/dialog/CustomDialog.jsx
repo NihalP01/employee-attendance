@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import { Dialog, DialogContent, DialogTitle, Divider } from '@mui/material';
 import React from 'react';
 
 const CustomDialog = (props) => {
@@ -9,6 +9,7 @@ const CustomDialog = (props) => {
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>{title}</DialogTitle>
+      <Divider/>
       <DialogContent>{children}</DialogContent>
     </Dialog>
   );

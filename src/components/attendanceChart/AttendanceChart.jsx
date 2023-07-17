@@ -1,10 +1,14 @@
 import { Box, Grid } from '@mui/material';
 import React from 'react';
-import { GridContainer, GridItem } from './attendanceChart.styles';
+import {
+  ButtonBox,
+  GridContainer,
+  GridItem,
+} from './attendanceChart.styles';
 import { Controls } from '../controls';
 
 const AttendanceChart = () => {
-  const num = 30;
+  const num = 31;
   return (
     <Box>
       <Controls.BaseTypography text="July, 2023" />
@@ -15,10 +19,15 @@ const AttendanceChart = () => {
           </GridItem>
         ))}
       </GridContainer>
-      <Box display={"flex"} mt={1}>
+      <Box display={'flex'} mt={1}>
         <Controls.BaseTypography text="Present days: 26" />
         <Controls.BaseTypography ml={4} text="Absent days: 4" />
+        <Controls.BaseTypography ml={4} text="Total days worked: 4" />
       </Box>
+      <ButtonBox>
+        <Controls.BaseButton text="Print" />
+        <Controls.BaseButton text="Close" />
+      </ButtonBox>
     </Box>
   );
 };

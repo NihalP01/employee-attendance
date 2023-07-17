@@ -1,4 +1,4 @@
-import { Grid, styled } from '@mui/material';
+import { Box, Grid, styled } from '@mui/material';
 
 export const GridContainer = styled(Grid)(() => ({
     margin: '0.5rem 0 0 0'
@@ -14,3 +14,12 @@ export const GridItem = styled(Grid)(({ isPresent }) => ({
   justifyContent: 'center',
   margin: '0.2rem',
 }));
+
+export const ButtonBox = styled(Box)(()=> ({
+  maxWidth: '160px',
+  marginTop: '2rem',
+  marginBottom: '0.1rem',
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginLeft: 'auto',
+}))
