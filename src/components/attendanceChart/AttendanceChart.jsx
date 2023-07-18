@@ -1,10 +1,6 @@
-import { Box, Divider, Grid, IconButton } from '@mui/material';
+import { Box, Divider, IconButton } from '@mui/material';
 import React from 'react';
-import {
-  ButtonBox,
-  GridContainer,
-  GridItem,
-} from './attendanceChart.styles';
+import { ButtonBox, GridContainer, GridItem } from './attendanceChart.styles';
 import { Controls } from '../controls';
 import { STATIC_ASSETS } from '../../global/staticAssets';
 

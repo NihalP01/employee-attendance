@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ManageBox, ManageWrapper } from './pages.styles';
 import { Controls } from '../components/controls';
 import { Components } from '../components';
-import { Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { manageCard, manageCardPayment } from '../constants/cardConst';
 
 const Manage = () => {
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleOpenCard = () => {
+    setOpenDialog(true);
+  };
+
   return (
     <ManageWrapper>
       <Controls.BaseTypography
@@ -20,8 +26,12 @@ const Manage = () => {
       />
       <ManageBox container spacing={2}>
         {manageCard.map((item) => (
-          <Grid item xs={2.5} key={item.id}>
-            <Components.ManageCards backgroundcolor={item.color} icon={item.icon} value={item.value} />
+          <Grid item xs={2.5} key={item.id} onClick={handleOpenCard}>
+            <Components.ManageCards
+              backgroundcolor={item.color}
+              icon={item.icon}
+              value={item.value}
+            />
           </Grid>
         ))}
       </ManageBox>
@@ -34,10 +44,21 @@ const Manage = () => {
       <ManageBox container spacing={2}>
         {manageCardPayment.map((item) => (
           <Grid item xs={2.5} key={item.id}>
-            <Components.ManageCards backgroundcolor={item.color} icon={item.icon} value={item.value} />
+            <Components.ManageCards
+              backgroundcolor={item.color}
+              icon={item.icon}
+              value={item.value}
+            />
           </Grid>
         ))}
       </ManageBox>
+      <Components.CustomDialog
+        title="Add an employee"
+        open={openDialog}
+        setOpen={setOpenDialog}
+      >
+        <Components.AddEmployeeForm setOpen={setOpenDialog} />
+      </Components.CustomDialog>
     </ManageWrapper>
   );
 };
