@@ -17,7 +17,7 @@ export const GridItem = styled(Grid)(({ isPresent }) => ({
 
 export const ButtonBox = styled(Box)(()=> ({
   maxWidth: '160px',
-  marginTop: '2rem',
+  marginTop: '0.7rem',
   marginBottom: '0.1rem',
   display: 'flex',
   justifyContent: 'space-between',

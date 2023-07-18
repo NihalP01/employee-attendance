@@ -45,7 +45,7 @@ const EmployeeTable = () => {
 
       <Components.CustomDialog
         open={open}
-        title="Employee name"
+        title="Joe Smith, welder"
         setOpen={setOpen}
       >
         <AttendanceChart />
