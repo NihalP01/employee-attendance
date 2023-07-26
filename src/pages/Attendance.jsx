@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AttendanceWrapper,
   ButtonBox,
@@ -12,36 +12,80 @@ import { STATIC_ASSETS } from '../global/staticAssets';
 import { Box } from '@mui/material';
 
 const Attendance = () => {
+  const [employeeData, setEmployeeData] = useState([]);
+  const [attendanceList, setAttendanceList] = useState([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('EMPLOYEE_DETAILS'));
+    setEmployeeData(data);
+  }, []);
+
+  function attendanceCount() {
+    let absentCount = 0;
+    for (const attendance of attendanceList) {
+      if (attendance.attendanceValue === 'present') {
+        absentCount++;
+      }
+    }
+    return absentCount;
+  }
+
+  const handleAttendanceChange = (attendanceData) => {
+    const filteredList = attendanceList.filter(
+      (item) => item.employeeId !== attendanceData.employeeId
+    );
+    setAttendanceList([...filteredList, attendanceData]);
+  };
+
+  const handleSubmitAttendance = () => {
+    localStorage.setItem(
+      'ATTENDANCE_LIST',
+      JSON.stringify(attendanceList)
+    );
+  };
+
   return (
     <AttendanceWrapper>
       <HeadingWrapper>
         <Controls.BaseTypography
           mt={2}
           variant="subtitle1"
-          text="Total Employees: 20"
+          text={`Total Employees: ${employeeData?.length}`}
         />
         <Controls.BaseTypography
           mt={2}
           variant="subtitle1"
-          text="Present: 10"
+          text={`Present: ${attendanceCount()}`}
         />
       </HeadingWrapper>
       <Box mt={6} display={'flex'} justifyContent={'space-between'}>
         <SearchBox>
           <Controls.BaseTextField label="Search employee" />
           <STATIC_ASSETS.SEARCH_ICON
-            sx={{ fontSize: '2rem', left: '-2rem', position: 'relative' }}
+            sx={{
+              fontSize: '2rem',
+              left: '-2rem',
+              position: 'relative',
+            }}
           />
         </SearchBox>
         <ButtonBox mr={'10rem'}>
-          <Controls.BaseButton text="Submit" />
+          <Controls.BaseButton
+            text="Submit"
+            onClick={handleSubmitAttendance}
+          />
         </ButtonBox>
       </Box>
       <EmployeeList pl={2} mt={5}>
         {/* FIXME: */}
-        <Components.CustomList />
-        <Components.CustomList />
-        <Components.CustomList />
+        {employeeData?.map((item) => (
+          <Components.CustomList
+            key={item.employeeId}
+            employeeId={item.employeeId}
+            employeeName={item.employeeName}
+            onAttendanceChange={handleAttendanceChange}
+          />
+        ))}
       </EmployeeList>
     </AttendanceWrapper>
   );

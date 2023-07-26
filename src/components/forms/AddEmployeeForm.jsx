@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BoxWrapper } from './addEmployee.styles';
 import { Box, Divider, FormControl, Grid } from '@mui/material';
 import { Controls } from '../controls/index';
 import { ButtonBox } from '../attendanceChart/attendanceChart.styles';
 
 const AddEmployeeForm = ({ setOpen }) => {
+  const uniqueID = new Date().getTime();
+  console.log(uniqueID);
+  
   const initialFormData = {
+    employeeId: uniqueID,
     employeeName: '',
     employeeDesignation: '',
     employeeWage: '',
@@ -34,16 +38,28 @@ const AddEmployeeForm = ({ setOpen }) => {
   const validateForm = () => {
     let errors = {};
 
-    // Perform validation logic for each field
     if (formData.employeeName.trim() === '') {
       errors.employeeName = 'Employee name is required';
     }
+    if (formData.employeeDesignation.trim() === '') {
+      errors.employeeDesignation = 'Employee designation is required';
+    }
 
-    // ... Perform validation for other fields ...
+    if (formData.employeeWage.trim() === '') {
+      errors.employeeWage = 'Employee wage is required';
+    }
+
+    if (formData.employeeAddress.trim() === '') {
+      errors.employeeAddress = 'Employee address is required';
+    }
+
+    if (formData.employeePhoneNumber.trim() === '') {
+      errors.employeePhoneNumber =
+        'Employee phone number is required';
+    }
 
     setFormErrors(errors);
 
-    // Return true if there are no errors, otherwise return false
     return Object.keys(errors).length === 0;
   };
 
@@ -51,10 +67,22 @@ const AddEmployeeForm = ({ setOpen }) => {
     e.preventDefault();
 
     if (validateForm()) {
-      console.log(formData);
+      const existedData =
+        JSON.parse(localStorage.getItem('EMPLOYEE_DETAILS')) || [];
+      const updatedData = [...existedData, formData];
+
+      localStorage.setItem(
+        'EMPLOYEE_DETAILS',
+        JSON.stringify(updatedData)
+      );
       setOpen(false);
     }
   };
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('EMPLOYEE_DETAILS'));
+    console.log(data);
+  }, []);
 
   return (
     <BoxWrapper>
@@ -64,7 +92,9 @@ const AddEmployeeForm = ({ setOpen }) => {
             label="Employee name"
             type="text"
             value={formData.employeeName}
-            onChange={(e) => handleFormChange('employeeName', e.target.value)}
+            onChange={(e) =>
+              handleFormChange('employeeName', e.target.value)
+            }
             error={Boolean(formErrors.employeeName)}
             helperText={formErrors.employeeName}
           />
@@ -76,13 +106,19 @@ const AddEmployeeForm = ({ setOpen }) => {
             onChange={(e) =>
               handleFormChange('employeeDesignation', e.target.value)
             }
+            error={Boolean(formErrors.employeeDesignation)}
+            helperText={formErrors.employeeDesignation}
           />
         </Grid>
         <Grid item xs={6}>
           <Controls.BaseTextField
             label="Employee Wage per day"
             type="number"
-            onChange={(e) => handleFormChange('employeeWage', e.target.value)}
+            onChange={(e) =>
+              handleFormChange('employeeWage', e.target.value)
+            }
+            error={Boolean(formErrors.employeeWage)}
+            helperText={formErrors.employeeWage}
           />
         </Grid>
         <Grid item xs={6}>
@@ -92,6 +128,8 @@ const AddEmployeeForm = ({ setOpen }) => {
             onChange={(e) =>
               handleFormChange('employeePhoneNumber', e.target.value)
             }
+            error={Boolean(formErrors.employeePhoneNumber)}
+            helperText={formErrors.employeePhoneNumber}
           />
         </Grid>
         <Grid item xs={12}>
@@ -101,6 +139,8 @@ const AddEmployeeForm = ({ setOpen }) => {
             onChange={(e) =>
               handleFormChange('employeeAddress', e.target.value)
             }
+            error={Boolean(formErrors.employeeAddress)}
+            helperText={formErrors.employeeAddress}
           />
         </Grid>
       </Grid>
