@@ -79,7 +79,7 @@ export const employeeListTableHeader = [
   },
   {
     id: 3,
-    value: 'Phonen Number',
+    value: 'Phone Number',
   },
 ];
 

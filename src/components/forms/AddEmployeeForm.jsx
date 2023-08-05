@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BoxWrapper } from './addEmployee.styles';
-import { Box, Divider, FormControl, Grid } from '@mui/material';
+import { Divider, Grid } from '@mui/material';
 import { Controls } from '../controls/index';
 import { ButtonBox } from '../attendanceChart/attendanceChart.styles';
 
 const AddEmployeeForm = ({ setOpen }) => {
   const uniqueID = new Date().getTime();
-  console.log(uniqueID);
-  
+
   const initialFormData = {
     employeeId: uniqueID,
     employeeName: '',
@@ -78,11 +77,6 @@ const AddEmployeeForm = ({ setOpen }) => {
       setOpen(false);
     }
   };
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('EMPLOYEE_DETAILS'));
-    console.log(data);
-  }, []);
 
   return (
     <BoxWrapper>

@@ -17,8 +17,6 @@ const EmployeeListTable = () => {
     setEmployeesListTableRows(data);
   }, []);
 
-  console.log(employeesListTableRows);
-
   return (
     <Table>
       <TableHead>

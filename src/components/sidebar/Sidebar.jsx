@@ -12,7 +12,7 @@ const Sidebar = () => {
   };
 
   const adminName = 'User Name';
-  let avatarName = adminName.slice(0, 1);
+  const avatarName = adminName.slice(0, 1);
   return (
     <BoxWrapper>
       <UserBox m={2}>

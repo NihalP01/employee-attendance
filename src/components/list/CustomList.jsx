@@ -3,10 +3,20 @@ import { Controls } from '../controls';
 import { GridWrapper } from './list.styles';
 import { Grid } from '@mui/material';
 import { attendance } from '../../constants/selectConst';
+import { Utils } from '../../utils/Utils';
 
 const CustomList = (props) => {
-  const { employeeId, employeeName, onAttendanceChange } = props;
-  const [attendanceValue, setAttendanceValue] = useState();
+  const {
+    employeeId,
+    employeeName,
+    attendanceStatus,
+    onAttendanceChange,
+  } = props;
+
+  const [attendanceValue, setAttendanceValue] =
+    useState(attendanceStatus);
+
+  const attendanceDate = Utils.formattedDate;
 
   const listcolor = () => {
     if (attendanceValue === 'absent') {
@@ -23,6 +33,7 @@ const CustomList = (props) => {
       employeeId,
       employeeName,
       attendanceValue: value,
+      attendanceDate,
     };
     onAttendanceChange(attendanceData);
   };
@@ -37,7 +48,6 @@ const CustomList = (props) => {
       </Grid>
       <Grid item xs={2}>
         <Controls.BaseSelect
-          label="Present"
           options={attendance}
           value={attendanceValue}
           onChange={(e) => handleAttendanceChange(e.target.value)}

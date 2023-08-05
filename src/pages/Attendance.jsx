@@ -13,7 +13,13 @@ import { Box } from '@mui/material';
 
 const Attendance = () => {
   const [employeeData, setEmployeeData] = useState([]);
-  const [attendanceList, setAttendanceList] = useState([]);
+  const savedAttendanceList = JSON.parse(
+    localStorage.getItem('ATTENDANCE_LIST')
+  );
+  const [attendanceList, setAttendanceList] = useState(savedAttendanceList);
+
+  
+  
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('EMPLOYEE_DETAILS'));
@@ -28,6 +34,14 @@ const Attendance = () => {
       }
     }
     return absentCount;
+  }
+
+  function getAttendanceStatus(employeeId) {
+    const attendanceData = attendanceList.find(
+      (attendance) => attendance.employeeId === employeeId
+    );
+
+    return attendanceData ? attendanceData.attendanceValue : 'absent';
   }
 
   const handleAttendanceChange = (attendanceData) => {
@@ -83,6 +97,7 @@ const Attendance = () => {
             key={item.employeeId}
             employeeId={item.employeeId}
             employeeName={item.employeeName}
+            attendanceStatus={getAttendanceStatus(item.employeeId)}
             onAttendanceChange={handleAttendanceChange}
           />
         ))}
