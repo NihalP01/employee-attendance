@@ -3,14 +3,32 @@ import { ManageBox, ManageWrapper } from './pages.styles';
 import { Controls } from '../components/controls';
 import { Components } from '../components';
 import { Box, Grid } from '@mui/material';
-import { manageCard, manageCardPayment } from '../constants/cardConst';
+import {
+  manageCard,
+  manageCardPayment,
+} from '../constants/cardConst';
 
 const Manage = () => {
   const [openDialog, setOpenDialog] = useState(false);
+  const [activeComponent, setActiveComponent] = useState(0);
 
-  const handleOpenCard = () => {
+  const handleOpenCard = (id) => {
+    setActiveComponent(id);
     setOpenDialog(true);
   };
+
+  const AddEmployeeForm = (
+    <Components.AddEmployeeForm setOpen={setOpenDialog} />
+  );
+
+  const EditEmployeeForm = <Components.EditEmployeeForm />;
+  const RemoveEmployeeForm = <Components.RemoveEmployeeForm />;
+
+  const popupForms = [
+    AddEmployeeForm,
+    EditEmployeeForm,
+    RemoveEmployeeForm,
+  ];
 
   return (
     <ManageWrapper>
@@ -26,7 +44,12 @@ const Manage = () => {
       />
       <ManageBox container spacing={2}>
         {manageCard.map((item) => (
-          <Grid item xs={2.5} key={item.id} onClick={handleOpenCard}>
+          <Grid
+            item
+            xs={2.5}
+            key={item.id}
+            onClick={() => handleOpenCard(item.id)}
+          >
             <Components.ManageCards
               backgroundcolor={item.color}
               icon={item.icon}
@@ -53,11 +76,19 @@ const Manage = () => {
         ))}
       </ManageBox>
       <Components.CustomDialog
-        title="Add an employee"
+        title={
+          activeComponent === 0
+            ? 'Add an employee'
+            : activeComponent === 1
+            ? 'Edit employee details'
+            : activeComponent === 2
+            ? 'Remove an employee'
+            : ''
+        }
         open={openDialog}
         setOpen={setOpenDialog}
       >
-        <Components.AddEmployeeForm setOpen={setOpenDialog} />
+        {popupForms[activeComponent]}
       </Components.CustomDialog>
     </ManageWrapper>
   );

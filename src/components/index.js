@@ -1,17 +1,23 @@
 import ManageCards from './cards/ManageCards';
-import CustomList from './list/CustomList';
+import AttendanceList from './list/AttendanceList';
 import Sidebar from './sidebar/Sidebar';
 import EmployeeListTable from './table/EmployeeListTable';
 import EmployeeTable from './table/EmployeeTable';
 import CustomDialog from './dialog/CustomDialog';
 import AddEmployeeForm from './forms/AddEmployeeForm';
+import EditEmployeeForm from './forms/EditEmployeeForm';
+import RemoveEmployeeForm from './forms/RemoveEmployeeForm';
+import List from './list/List';
 
 export const Components = {
   Sidebar,
   EmployeeTable,
-  CustomList,
+  AttendanceList,
   EmployeeListTable,
   ManageCards,
   CustomDialog,
   AddEmployeeForm,
+  EditEmployeeForm,
+  RemoveEmployeeForm,
+  List,
 };

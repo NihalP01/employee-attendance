@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BoxWrapper } from './addEmployee.styles';
+import { BoxWrapper } from './forms.styles';
 import { Divider, Grid } from '@mui/material';
 import { Controls } from '../controls/index';
 import { ButtonBox } from '../attendanceChart/attendanceChart.styles';
