@@ -16,10 +16,11 @@ const Attendance = () => {
   const savedAttendanceList = JSON.parse(
     localStorage.getItem('ATTENDANCE_LIST')
   );
-  const [attendanceList, setAttendanceList] = useState(savedAttendanceList);
+  const [attendanceList, setAttendanceList] = useState(
+    savedAttendanceList ? savedAttendanceList : []
+  );
 
-  
-  
+  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('EMPLOYEE_DETAILS'));
@@ -52,10 +53,12 @@ const Attendance = () => {
   };
 
   const handleSubmitAttendance = () => {
-    localStorage.setItem(
-      'ATTENDANCE_LIST',
-      JSON.stringify(attendanceList)
-    );
+    localStorage.setItem('ATTENDANCE_LIST', JSON.stringify(attendanceList));
+    setOpenDialog(true);
+  };
+
+  const handleDialogButtonClick = () => {
+    setOpenDialog(false);
   };
 
   return (
@@ -84,10 +87,7 @@ const Attendance = () => {
           />
         </SearchBox>
         <ButtonBox mr={'10rem'}>
-          <Controls.BaseButton
-            text="Submit"
-            onClick={handleSubmitAttendance}
-          />
+          <Controls.BaseButton text="Submit" onClick={handleSubmitAttendance} />
         </ButtonBox>
       </Box>
       <EmployeeList pl={2} mt={5}>
@@ -102,6 +102,18 @@ const Attendance = () => {
           />
         ))}
       </EmployeeList>
+      <Components.CustomDialog
+        open={openDialog}
+        setOpen={handleSubmitAttendance}
+        title="Updated"
+      >
+        <Box>
+          <Controls.BaseTypography text="Attendance updated successfully" variant="body2" />
+        </Box>
+        <Box mt={2} display={'flex'} justifyContent={'center'}>
+          <Controls.BaseButton text="Ok" onClick={handleDialogButtonClick} />
+        </Box>
+      </Components.CustomDialog>
     </AttendanceWrapper>
   );
 };
