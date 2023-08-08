@@ -3,9 +3,20 @@ import { Controls } from '../controls';
 import { GridWrapper } from './list.styles';
 import { Grid } from '@mui/material';
 import { attendance } from '../../constants/selectConst';
+import { Utils } from '../../utils/Utils';
 
-const CustomList = () => {
-  const [attendanceValue, setAttendanceValue] = useState('absent');
+const CustomList = (props) => {
+  const {
+    employeeId,
+    employeeName,
+    attendanceStatus,
+    onAttendanceChange,
+  } = props;
+
+  const [attendanceValue, setAttendanceValue] =
+    useState(attendanceStatus);
+
+  const attendanceDate = Utils.formattedDate;
 
   const listcolor = () => {
     if (attendanceValue === 'absent') {
@@ -15,21 +26,32 @@ const CustomList = () => {
     }
   };
 
+  const handleAttendanceChange = (value) => {
+    setAttendanceValue(value);
+
+    const attendanceData = {
+      employeeId,
+      employeeName,
+      attendanceValue: value,
+      attendanceDate,
+    };
+    onAttendanceChange(attendanceData);
+  };
+
   return (
     <GridWrapper listcolor={listcolor()} mt={1} container spacing={2}>
-      <Grid display={'flex'} alignItems={'center'} item xs={3.5}>
-        <Controls.BaseTypography variant="subtitle2" text="Name Title" />
-      </Grid>
-      <Grid item xs={2}>
-        <Controls.BaseSelect
-          label="Present"
-          options={attendance}
-          value={attendanceValue}
-          onChange={(e) => setAttendanceValue(e.target.value)}
+      <Grid display={'flex'} alignItems={'center'} item xs={6}>
+        <Controls.BaseTypography
+          variant="subtitle2"
+          text={employeeName}
         />
       </Grid>
       <Grid item xs={2}>
-        <Controls.BaseTextField label="time" />
+        <Controls.BaseSelect
+          options={attendance}
+          value={attendanceValue}
+          onChange={(e) => handleAttendanceChange(e.target.value)}
+        />
       </Grid>
     </GridWrapper>
   );

@@ -70,12 +70,16 @@ export const employeeListTableHeader = [
     value: 'Name',
   },
   {
+    id: 1,
+    value: 'Designation',
+  },
+  {
     id: 2,
     value: 'Address',
   },
   {
     id: 3,
-    value: 'Phonen Number',
+    value: 'Phone Number',
   },
 ];
 
@@ -83,18 +87,21 @@ export const employeesListTableRows = [
   {
     id: 0,
     name: 'Nihal Buragohain',
+    designation: 'welder',
     address: 'Panibil, Sibsagar',
     phoneNumber: '7002028029',
   },
   {
     id: 2,
     name: 'Nihal Buragohain',
+    designation: 'welder',
     address: 'Panibil, Sibsagar',
     phoneNumber: '7002028029',
   },
   {
     id: 3,
     name: 'Nihal Buragohain',
+    designation: 'welder',
     address: 'Panibil, Sibsagar',
     phoneNumber: '7002028029',
   },

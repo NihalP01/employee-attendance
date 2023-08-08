@@ -5,13 +5,18 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import React from 'react';
-import {
-  employeeListTableHeader,
-  employeesListTableRows,
-} from '../../constants/tableConst';
+import React, { useEffect, useState } from 'react';
+import { employeeListTableHeader } from '../../constants/tableConst';
 
 const EmployeeListTable = () => {
+  const [employeesListTableRows, setEmployeesListTableRows] =
+    useState([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('EMPLOYEE_DETAILS'));
+    setEmployeesListTableRows(data);
+  }, []);
+
   return (
     <Table>
       <TableHead>
@@ -22,11 +27,12 @@ const EmployeeListTable = () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {employeesListTableRows.map((item) => (
-          <TableRow key={item.id}>
-            <TableCell>{item.name}</TableCell>
-            <TableCell>{item.address}</TableCell>
-            <TableCell>{item.phoneNumber}</TableCell>
+        {employeesListTableRows?.map((item) => (
+          <TableRow key={item.employeeId}>
+            <TableCell>{item.employeeName}</TableCell>
+            <TableCell>{item.employeeDesignation}</TableCell>
+            <TableCell>{item.employeeAddress}</TableCell>
+            <TableCell>{item.employeePhoneNumber}</TableCell>
           </TableRow>
         ))}
       </TableBody>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AttendanceWrapper,
   ButtonBox,
@@ -12,37 +12,108 @@ import { STATIC_ASSETS } from '../global/staticAssets';
 import { Box } from '@mui/material';
 
 const Attendance = () => {
+  const [employeeData, setEmployeeData] = useState([]);
+  const savedAttendanceList = JSON.parse(
+    localStorage.getItem('ATTENDANCE_LIST')
+  );
+  const [attendanceList, setAttendanceList] = useState(
+    savedAttendanceList ? savedAttendanceList : []
+  );
+
+  const [openDialog, setOpenDialog] = useState(false);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('EMPLOYEE_DETAILS'));
+    setEmployeeData(data);
+  }, []);
+
+  function attendanceCount() {
+    let absentCount = 0;
+    for (const attendance of attendanceList) {
+      if (attendance.attendanceValue === 'present') {
+        absentCount++;
+      }
+    }
+    return absentCount;
+  }
+
+  function getAttendanceStatus(employeeId) {
+    const attendanceData = attendanceList.find(
+      (attendance) => attendance.employeeId === employeeId
+    );
+
+    return attendanceData ? attendanceData.attendanceValue : 'absent';
+  }
+
+  const handleAttendanceChange = (attendanceData) => {
+    const filteredList = attendanceList.filter(
+      (item) => item.employeeId !== attendanceData.employeeId
+    );
+    setAttendanceList([...filteredList, attendanceData]);
+  };
+
+  const handleSubmitAttendance = () => {
+    localStorage.setItem('ATTENDANCE_LIST', JSON.stringify(attendanceList));
+    setOpenDialog(true);
+  };
+
+  const handleDialogButtonClick = () => {
+    setOpenDialog(false);
+  };
+
   return (
     <AttendanceWrapper>
       <HeadingWrapper>
         <Controls.BaseTypography
           mt={2}
           variant="subtitle1"
-          text="Total Employees: 20"
+          text={`Total Employees: ${employeeData?.length}`}
         />
         <Controls.BaseTypography
           mt={2}
           variant="subtitle1"
-          text="Present: 10"
+          text={`Present: ${attendanceCount()}`}
         />
       </HeadingWrapper>
       <Box mt={6} display={'flex'} justifyContent={'space-between'}>
         <SearchBox>
           <Controls.BaseTextField label="Search employee" />
           <STATIC_ASSETS.SEARCH_ICON
-            sx={{ fontSize: '2rem', left: '-2rem', position: 'relative' }}
+            sx={{
+              fontSize: '2rem',
+              left: '-2rem',
+              position: 'relative',
+            }}
           />
         </SearchBox>
         <ButtonBox mr={'10rem'}>
-          <Controls.BaseButton text="Submit" />
+          <Controls.BaseButton text="Submit" onClick={handleSubmitAttendance} />
         </ButtonBox>
       </Box>
       <EmployeeList pl={2} mt={5}>
         {/* FIXME: */}
-        <Components.CustomList />
-        <Components.CustomList />
-        <Components.CustomList />
+        {employeeData?.map((item) => (
+          <Components.CustomList
+            key={item.employeeId}
+            employeeId={item.employeeId}
+            employeeName={item.employeeName}
+            attendanceStatus={getAttendanceStatus(item.employeeId)}
+            onAttendanceChange={handleAttendanceChange}
+          />
+        ))}
       </EmployeeList>
+      <Components.CustomDialog
+        open={openDialog}
+        setOpen={handleSubmitAttendance}
+        title="Updated"
+      >
+        <Box>
+          <Controls.BaseTypography text="Attendance updated successfully" variant="body2" />
+        </Box>
+        <Box mt={2} display={'flex'} justifyContent={'center'}>
+          <Controls.BaseButton text="Ok" onClick={handleDialogButtonClick} />
+        </Box>
+      </Components.CustomDialog>
     </AttendanceWrapper>
   );
 };
