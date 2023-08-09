@@ -7,7 +7,6 @@ import CustomDialog from './dialog/CustomDialog';
 import AddEmployeeForm from './forms/AddEmployeeForm';
 import EditEmployeeForm from './forms/EditEmployeeForm';
 import RemoveEmployeeForm from './forms/RemoveEmployeeForm';
-import List from './list/List';
 
 export const Components = {
   Sidebar,
@@ -19,5 +18,4 @@ export const Components = {
   AddEmployeeForm,
   EditEmployeeForm,
   RemoveEmployeeForm,
-  List,
 };

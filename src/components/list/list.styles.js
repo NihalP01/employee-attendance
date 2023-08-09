@@ -9,6 +9,8 @@ export const GridWrapper = styled(Grid)(({ listcolor }) => ({
 
 export const BoxWrapper = styled(Box)(() => ({}));
 
-export const CustomList = styled(Box)(() => ({
+export const CustomList = styled(Box)(() => ({}));
+
+export const TextBox = styled(Box)(() => ({
   
 }));

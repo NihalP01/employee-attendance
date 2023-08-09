@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ManageBox, ManageWrapper } from './pages.styles';
 import { Controls } from '../components/controls';
 import { Components } from '../components';
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import {
   manageCard,
   manageCardPayment,
@@ -87,6 +87,7 @@ const Manage = () => {
         }
         open={openDialog}
         setOpen={setOpenDialog}
+        maxWidth={'lg'}
       >
         {popupForms[activeComponent]}
       </Components.CustomDialog>

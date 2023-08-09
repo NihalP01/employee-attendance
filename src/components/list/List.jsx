@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
 import { Controls } from '../controls';
-import { BoxWrapper, CustomList } from './list.styles';
+import { BoxWrapper, CustomList, TextBox } from './list.styles';
 import { Box } from '@mui/material';
 
 const List = ({ empDetails }) => {
   const [editing, setEditing] = useState(false);
-  const [textValue, setTextValue] = useState(empDetails.employeeName);
+  const [empName, setEmpName] = useState(empDetails.employeeName);
+  const [empDesignation, setEmpDesignation] = useState(
+    empDetails.employeeDesignation
+  );
+  const [employeeAddress, setEmployeeAddress] = useState(
+    empDetails.employeeAddress
+  );
+  const [employeePhoneNumber, setEmployeePhoneNumber] = useState(
+    empDetails.employeePhoneNumber
+  );
+  const [employeeWage, setEmployeeWage] = useState(
+    empDetails.employeeWage
+  );
 
   const handleEdit = () => {
     setEditing(true);
@@ -16,34 +28,61 @@ const List = ({ empDetails }) => {
   };
 
   const handleChange = (event) => {
-    setTextValue(event.target.value);
+    setEmpName(event.target.value);
   };
 
   return (
     <BoxWrapper>
       <CustomList>
         {editing ? (
-          <Box>
+          <Box display={'flex'}>
             <Controls.BaseTextField
-              value={textValue}
+              value={empName}
               placeholder="Name"
               onChange={handleChange}
             />
             <Controls.BaseTextField
-              value={textValue}
+              value={empDesignation}
               placeholder="Designation"
               onChange={handleChange}
             />
-
           </Box>
         ) : (
-          <Box display={'flex'} justifyContent={'space-between'}>
-            <Controls.BaseTypography
-              text={textValue}
-              variant="body1"
+          <TextBox
+            display={'flex'}
+            justifyContent={'space-between'}
+            alignItems={'center'}
+          >
+            <Box
+              width={'100%'}
+              display={'flex'}
+              justifyContent={'space-between'}
+              py={2}
+            >
+              <Controls.BaseTypography
+                text={empName}
+                variant="body1"
+              />
+              <Controls.BaseTypography
+                text={empDesignation}
+                variant="body1"
+              />
+              <Controls.BaseTypography
+                text={empName}
+                variant="body1"
+              />
+              <Controls.BaseTypography
+                text={empDesignation}
+                variant="body1"
+              />
+            </Box>
+            <Controls.BaseButton
+              sx={{ height: 28, marginLeft: 2 }}
+              btnsize={20}
+              onClick={handleEdit}
+              text="Edit"
             />
-            <Controls.BaseButton onClick={handleEdit} text="Edit" />
-          </Box>
+          </TextBox>
         )}
         {editing && (
           <Controls.BaseButton onClick={handleSave} text="Save" />

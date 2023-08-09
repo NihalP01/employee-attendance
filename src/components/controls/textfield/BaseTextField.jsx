@@ -2,7 +2,11 @@ import React from 'react';
 import { CustomTextField } from './baseTextfield.styles';
 
 const BaseTextField = (props) => {
-  const { variant, size, type, onChange, label, value, ...others } = props;
+  const { variant, size, type, onChange, label, value, fontSize, ...others } =
+    props;
+  const fontSizeStyle = {
+    fontSize: fontSize || 'inherit',
+  };
   return (
     <CustomTextField
       label={label}
@@ -12,6 +16,7 @@ const BaseTextField = (props) => {
       type={type}
       size={size ? size : 'small'}
       fullWidth
+      inputProps={{ style: fontSizeStyle }}
       {...others}
     />
   );
