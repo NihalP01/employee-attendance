@@ -46,7 +46,7 @@ const Manage = () => {
         {manageCard.map((item) => (
           <Grid
             item
-            xs={2.5}
+            xs={2.7}
             key={item.id}
             onClick={() => handleOpenCard(item.id)}
           >
@@ -66,7 +66,7 @@ const Manage = () => {
       />
       <ManageBox container spacing={2}>
         {manageCardPayment.map((item) => (
-          <Grid item xs={2.5} key={item.id}>
+          <Grid item xs={2.7} key={item.id}>
             <Components.ManageCards
               backgroundcolor={item.color}
               icon={item.icon}

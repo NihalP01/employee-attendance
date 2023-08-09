@@ -34,7 +34,7 @@ export const theme = createTheme({
     body3: {
       fontSize: '1rem',
       lineHeight: '1.5rem',
-      fontWeight: 600,
+      fontWeight: 500,
     },
     h1: {
       fontWeight: 500,

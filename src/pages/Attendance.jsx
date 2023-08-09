@@ -80,7 +80,7 @@ const Attendance = () => {
       </HeadingWrapper>
       <Box mt={6} display={'flex'} justifyContent={'space-between'}>
         <SearchBox>
-          <Controls.BaseTextField label="Search employee" />
+          <Controls.BaseTextField placeholder="Search employee" />
           <STATIC_ASSETS.SEARCH_ICON
             sx={{
               fontSize: '2rem',

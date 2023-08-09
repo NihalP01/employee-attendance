@@ -82,9 +82,11 @@ const AddEmployeeForm = ({ setOpen }) => {
     <BoxWrapper>
       <Grid mb={4} container spacing={2}>
         <Grid item xs={6}>
+          <Controls.BaseTypography variant="body3" text="Name" />
           <Controls.BaseTextField
-            label="Employee name"
+            placeholder="Joe Smith"
             type="text"
+            sx={{ marginTop: 0.6 }}
             value={formData.employeeName}
             onChange={(e) =>
               handleFormChange('employeeName', e.target.value)
@@ -94,9 +96,14 @@ const AddEmployeeForm = ({ setOpen }) => {
           />
         </Grid>
         <Grid item xs={6}>
+          <Controls.BaseTypography
+            variant="body3"
+            text="Designation"
+          />
           <Controls.BaseTextField
-            label="Employee Designation"
+            placeholder="Welder"
             type="text"
+            sx={{ marginTop: 0.6 }}
             onChange={(e) =>
               handleFormChange('employeeDesignation', e.target.value)
             }
@@ -105,9 +112,14 @@ const AddEmployeeForm = ({ setOpen }) => {
           />
         </Grid>
         <Grid item xs={6}>
+          <Controls.BaseTypography
+            variant="body3"
+            text="Wage per day"
+          />
           <Controls.BaseTextField
-            label="Employee Wage per day"
             type="number"
+            placeholder="800"
+            sx={{ marginTop: 0.6 }}
             onChange={(e) =>
               handleFormChange('employeeWage', e.target.value)
             }
@@ -116,9 +128,14 @@ const AddEmployeeForm = ({ setOpen }) => {
           />
         </Grid>
         <Grid item xs={6}>
+          <Controls.BaseTypography
+            variant="body3"
+            text="Phone Number"
+          />
           <Controls.BaseTextField
-            label="Employee Phone number"
             type="number"
+            placeholder="7002020202"
+            sx={{ marginTop: 0.6 }}
             onChange={(e) =>
               handleFormChange('employeePhoneNumber', e.target.value)
             }
@@ -127,12 +144,19 @@ const AddEmployeeForm = ({ setOpen }) => {
           />
         </Grid>
         <Grid item xs={12}>
+          <Controls.BaseTypography
+            variant="body3"
+            text="Employee Address"
+          />
           <Controls.BaseTextField
-            label="Employee address"
             type="text"
+            placeholder="Panibil Jamunamukh, Sibsagar, Assam"
+            sx={{ marginTop: 0.6 }}
             onChange={(e) =>
               handleFormChange('employeeAddress', e.target.value)
             }
+            multiline
+            rows={4}
             error={Boolean(formErrors.employeeAddress)}
             helperText={formErrors.employeeAddress}
           />
