@@ -5,7 +5,7 @@ import { Grid } from '@mui/material';
 import { attendance } from '../../constants/selectConst';
 import { Utils } from '../../utils/Utils';
 
-const CustomList = (props) => {
+const AttendanceList = (props) => {
   const {
     employeeId,
     employeeName,
@@ -57,4 +57,4 @@ const CustomList = (props) => {
   );
 };
 
-export default CustomList;
+export default AttendanceList;
