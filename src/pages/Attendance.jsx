@@ -37,8 +37,6 @@ const Attendance = () => {
     return presentCount;
   }
 
-  console.log(attendanceList)
-
   function getAttendanceStatus(employeeId) {
     const attendanceData = attendanceList.find(
       (attendance) => attendance.employeeId === employeeId
