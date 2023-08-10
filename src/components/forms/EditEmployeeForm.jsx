@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BoxWrapper } from './forms.styles';
+import { EditEmployeeFormBoxWrapper } from './forms.styles';
 import {
   Table,
   TableBody,
@@ -8,6 +8,9 @@ import {
   TableRow,
 } from '@mui/material';
 import { Controls } from '../controls';
+import { editEmployeeTableHeader } from '../../constants/tableConst';
+import { SearchBox } from '../../pages/pages.styles';
+import { STATIC_ASSETS } from '../../global/staticAssets';
 
 const EditEmployeeForm = () => {
   const [employeeList, setEmployeeList] = useState([]);
@@ -59,15 +62,23 @@ const EditEmployeeForm = () => {
   };
 
   return (
-    <BoxWrapper>
+    <EditEmployeeFormBoxWrapper>
+      <SearchBox>
+        <Controls.BaseTextField placeholder="Search employee" />
+        <STATIC_ASSETS.SEARCH_ICON
+          sx={{
+            fontSize: '2rem',
+            left: '-2rem',
+            position: 'relative',
+          }}
+        />
+      </SearchBox>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Designation</TableCell>
-            <TableCell>Wage</TableCell>
-            <TableCell>Address</TableCell>
-            <TableCell>Phone Number</TableCell>
+            {editEmployeeTableHeader.map((item) => (
+              <TableCell key={item.id}>{item.value}</TableCell>
+            ))}
             <TableCell></TableCell>
           </TableRow>
         </TableHead>
@@ -189,8 +200,9 @@ const EditEmployeeForm = () => {
           ))}
         </TableBody>
       </Table>
-    </BoxWrapper>
+    </EditEmployeeFormBoxWrapper>
   );
 };
 
 export default EditEmployeeForm;
+//die
