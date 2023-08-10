@@ -28,14 +28,16 @@ const Attendance = () => {
   }, []);
 
   function attendanceCount() {
-    let absentCount = 0;
+    let presentCount = 0;
     for (const attendance of attendanceList) {
       if (attendance.attendanceValue === 'present') {
-        absentCount++;
+        presentCount++;
       }
     }
-    return absentCount;
+    return presentCount;
   }
+
+  console.log(attendanceList)
 
   function getAttendanceStatus(employeeId) {
     const attendanceData = attendanceList.find(
@@ -70,7 +72,7 @@ const Attendance = () => {
         <Controls.BaseTypography
           mt={2}
           variant="subtitle1"
-          text={`Total Employees: ${employeeData?.length}`}
+          text={`Total Employees: ${employeeData?.length || 0}`}
         />
         <Controls.BaseTypography
           mt={2}

@@ -1,14 +1,77 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BoxWrapper } from './forms.styles';
-import { Box } from '@mui/material';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from '@mui/material';
 import { Controls } from '../controls';
+import { editEmployeeTableHeader } from '../../constants/tableConst';
 
 const RemoveEmployeeForm = () => {
+  const [employeeList, setEmployeeList] = useState([]);
+  useEffect(() => {
+    setEmployeeList(
+      JSON.parse(localStorage.getItem('EMPLOYEE_DETAILS'))
+    );
+  }, []);
+
+  const handleRemoveEmployee = (id) => {
+    const employeeIndex = employeeList.findIndex(
+      (item) => item.employeeId === id
+    );
+
+    if (employeeIndex !== -1) {
+      const updatedEmployeeList = [...employeeList];
+      updatedEmployeeList.splice(employeeIndex, 1);
+
+      setEmployeeList(updatedEmployeeList);
+      localStorage.setItem(
+        'EMPLOYEE_DETAILS',
+        JSON.stringify(updatedEmployeeList)
+      );
+    }
+  };
+
   return (
     <BoxWrapper>
-      <Box>
-        <Controls.BaseTypography text="Remove employee" />
-      </Box>
+      <Table>
+        <TableHead>
+          <TableRow>
+            {editEmployeeTableHeader.map((item) => (
+              <TableCell key={item.id}>{item.value}</TableCell>
+            ))}
+            <TableCell></TableCell>
+          </TableRow>
+        </TableHead>
+        {employeeList.length === 0 ? (
+          <Controls.BaseTypography mt={4} text="No data available" />
+        ) : (
+          <TableBody>
+            {employeeList.map((item) => (
+              <TableRow key={item.employeeId}>
+                <TableCell>{item.employeeName}</TableCell>
+                <TableCell>{item.employeeDesignation}</TableCell>
+                <TableCell>{item.employeeWage}</TableCell>
+                <TableCell>{item.employeeAddress}</TableCell>
+                <TableCell>{item.employeePhoneNumber}</TableCell>
+                <TableCell>
+                  <Controls.BaseButton
+                    text="Remove"
+                    onClick={() =>
+                      handleRemoveEmployee(item.employeeId)
+                    }
+                    color="error"
+                    sx={{ height: 30 }}
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        )}
+      </Table>
     </BoxWrapper>
   );
 };
