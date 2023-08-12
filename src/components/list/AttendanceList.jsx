@@ -14,7 +14,7 @@ const AttendanceList = (props) => {
   } = props;
 
   const [attendanceValue, setAttendanceValue] =
-    useState(attendanceStatus);
+    useState(attendanceStatus);    
 
   const attendanceDate = Utils.formattedDate;
 
@@ -49,6 +49,7 @@ const AttendanceList = (props) => {
       <Grid item xs={2}>
         <Controls.BaseSelect
           options={attendance}
+          defaultValue='absent'
           value={attendanceValue}
           onChange={(e) => handleAttendanceChange(e.target.value)}
         />

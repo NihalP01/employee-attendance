@@ -16,6 +16,7 @@ const Attendance = () => {
   const savedAttendanceList = JSON.parse(
     localStorage.getItem('ATTENDANCE_LIST')
   );
+
   const [attendanceList, setAttendanceList] = useState(
     savedAttendanceList ? savedAttendanceList : []
   );
@@ -41,7 +42,6 @@ const Attendance = () => {
     const attendanceData = attendanceList.find(
       (attendance) => attendance.employeeId === employeeId
     );
-
     return attendanceData ? attendanceData.attendanceValue : 'absent';
   }
 
@@ -49,6 +49,8 @@ const Attendance = () => {
     const filteredList = attendanceList.filter(
       (item) => item.employeeId !== attendanceData.employeeId
     );
+
+    console.log(filteredList);
     setAttendanceList([...filteredList, attendanceData]);
   };
 
@@ -57,12 +59,15 @@ const Attendance = () => {
       'ATTENDANCE_LIST',
       JSON.stringify(attendanceList)
     );
+
     setOpenDialog(true);
   };
 
   const handleDialogButtonClick = () => {
     setOpenDialog(false);
   };
+
+  console.log(attendanceList)
 
   return (
     <AttendanceWrapper>
@@ -97,7 +102,6 @@ const Attendance = () => {
         </ButtonBox>
       </Box>
       <EmployeeList pl={2} mt={5}>
-        {/* FIXME: */}
         {employeeData?.map((item) => (
           <Components.AttendanceList
             key={item.employeeId}

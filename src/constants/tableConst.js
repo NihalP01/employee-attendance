@@ -13,7 +13,7 @@ export const tableHeader = [
   },
   {
     id: 3,
-    value: 'Total worked',
+    value: 'Total working days',
   },
   {
     id: 4,
