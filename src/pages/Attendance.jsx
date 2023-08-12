@@ -42,7 +42,7 @@ const Attendance = () => {
     const attendanceData = attendanceList.find(
       (attendance) => attendance.employeeId === employeeId
     );
-    return attendanceData ? attendanceData.attendanceValue : 'absent';
+    return attendanceData ? attendanceData.currentAttendace : 'absent';
   }
 
   const handleAttendanceChange = (attendanceData) => {
