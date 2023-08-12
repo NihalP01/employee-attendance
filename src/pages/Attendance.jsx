@@ -96,7 +96,7 @@ const Attendance = () => {
         </SearchBox>
         <ButtonBox mr={'10rem'}>
           <Controls.BaseButton
-            text="Submit"
+            text="Save"
             onClick={handleSubmitAttendance}
           />
         </ButtonBox>

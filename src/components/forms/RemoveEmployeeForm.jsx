@@ -15,41 +15,30 @@ const RemoveEmployeeForm = () => {
   const [attendanceList, setAttendanceList] = useState([]);
 
   useEffect(() => {
-    setEmployeeList(
-      JSON.parse(localStorage.getItem('EMPLOYEE_DETAILS'))
-    );
-    setAttendanceList(
-      JSON.parse(localStorage.getItem('ATTENDANCE_LIST'))
-    );
+    setEmployeeList(JSON.parse(localStorage.getItem('EMPLOYEE_DETAILS')));
+    setAttendanceList(JSON.parse(localStorage.getItem('ATTENDANCE_LIST')));
   }, []);
 
   const handleRemoveEmployee = (id) => {
-    const employeeIndex = employeeList.findIndex(
-      (item) => item.employeeId === id
-    );
-    if (employeeIndex !== -1) {
-      const updatedEmployeeList = [...employeeList];
-      updatedEmployeeList.splice(employeeIndex, 1);
-
-      setEmployeeList(updatedEmployeeList);
-      localStorage.setItem(
-        'EMPLOYEE_DETAILS',
-        JSON.stringify(updatedEmployeeList)
-      );
-    }
-
-    const employeeAttendanceIndex = attendanceList.findIndex(
-      (item) => item.employeeId === id
+    const updatedEmployeeList = employeeList.filter(
+      (item) => item.employeeId !== id
     );
 
-    if (employeeAttendanceIndex !== -1) {
-      const updatedAttendanceList = [...attendanceList];
-      updatedAttendanceList.splice(employeeAttendanceIndex, 1);
-      localStorage.setItem(
-        'ATTENDANCE_LIST',
-        JSON.stringify(updatedAttendanceList)
-      );
-    }
+    setEmployeeList(updatedEmployeeList);
+    localStorage.setItem(
+      'EMPLOYEE_DETAILS',
+      JSON.stringify(updatedEmployeeList)
+    );
+
+    const updatedAttendanceList = attendanceList.filter(
+      (item) => item.employeeId !== id
+    );
+
+    setAttendanceList(updatedAttendanceList);
+    localStorage.setItem(
+      'ATTENDANCE_LIST',
+      JSON.stringify(updatedAttendanceList)
+    );
   };
 
   return (
@@ -78,9 +67,7 @@ const RemoveEmployeeForm = () => {
                 <TableCell>
                   <Controls.BaseButton
                     text="Remove"
-                    onClick={() =>
-                      handleRemoveEmployee(item.employeeId)
-                    }
+                    onClick={() => handleRemoveEmployee(item.employeeId)}
                     color="error"
                     sx={{ height: 30 }}
                   />
