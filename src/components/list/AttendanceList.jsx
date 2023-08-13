@@ -6,17 +6,11 @@ import { attendance } from '../../constants/selectConst';
 import { Utils } from '../../utils/Utils';
 
 const AttendanceList = (props) => {
-  const {
-    employeeId,
-    employeeName,
-    attendanceStatus,
-    onAttendanceChange,
-  } = props;
+  const { employeeId, employeeName, attendanceStatus, onAttendanceChange } =
+    props;
 
-  const [attendanceValue, setAttendanceValue] =
-    useState(attendanceStatus);
-
-  const attendanceDate = Utils.formattedDate;
+  const [attendanceValue, setAttendanceValue] = useState(attendanceStatus);
+  const [dailyAttendance, setDailyAttendance] = useState([]);
 
   const listcolor = () => {
     if (attendanceValue === 'absent') {
@@ -28,17 +22,23 @@ const AttendanceList = (props) => {
 
   const handleAttendanceChange = (status) => {
     setAttendanceValue(status);
+    const attendanceDate = Utils.formattedDate;
+    console.log(attendanceDate)
+    const updatedDailyAttendance = [
+      ...dailyAttendance,
+      {
+        attendanceDate,
+        status,
+      },
+    ];
+
+    setDailyAttendance(updatedDailyAttendance);
 
     const attendanceData = {
       employeeId,
       employeeName,
-      attendanceDays: [
-        {
-          status,
-          attendanceDate,
-        },
-      ],
-      currentAttendace: status,
+      attendanceDays: updatedDailyAttendance,
+      currentAttendance: status,
     };
     onAttendanceChange(attendanceData);
   };
@@ -46,10 +46,7 @@ const AttendanceList = (props) => {
   return (
     <GridWrapper listcolor={listcolor()} mt={1} container spacing={2}>
       <Grid display={'flex'} alignItems={'center'} item xs={6}>
-        <Controls.BaseTypography
-          variant="subtitle2"
-          text={employeeName}
-        />
+        <Controls.BaseTypography variant="subtitle2" text={employeeName} />
       </Grid>
       <Grid item xs={2}>
         <Controls.BaseSelect

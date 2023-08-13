@@ -42,15 +42,15 @@ const Attendance = () => {
     const attendanceData = attendanceList.find(
       (attendance) => attendance.employeeId === employeeId
     );
-    return attendanceData ? attendanceData.currentAttendace : 'absent';
+    return attendanceData ? attendanceData.currentAttendance : 'absent';
   }
+
+  console.log(attendanceList)
 
   const handleAttendanceChange = (attendanceData) => {
     const filteredList = attendanceList.filter(
       (item) => item.employeeId !== attendanceData.employeeId
     );
-
-    console.log(filteredList);
     setAttendanceList([...filteredList, attendanceData]);
   };
 
@@ -67,7 +67,6 @@ const Attendance = () => {
     setOpenDialog(false);
   };
 
-  console.log(attendanceList)
 
   return (
     <AttendanceWrapper>
