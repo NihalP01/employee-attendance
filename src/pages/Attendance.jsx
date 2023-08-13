@@ -16,6 +16,7 @@ const Attendance = () => {
   const savedAttendanceList = JSON.parse(
     localStorage.getItem('ATTENDANCE_LIST')
   );
+
   const [attendanceList, setAttendanceList] = useState(
     savedAttendanceList ? savedAttendanceList : []
   );
@@ -28,27 +29,28 @@ const Attendance = () => {
   }, []);
 
   function attendanceCount() {
-    let absentCount = 0;
+    let presentCount = 0;
     for (const attendance of attendanceList) {
       if (attendance.attendanceValue === 'present') {
-        absentCount++;
+        presentCount++;
       }
     }
-    return absentCount;
+    return presentCount;
   }
 
   function getAttendanceStatus(employeeId) {
     const attendanceData = attendanceList.find(
       (attendance) => attendance.employeeId === employeeId
     );
-
-    return attendanceData ? attendanceData.attendanceValue : 'absent';
+    return attendanceData ? attendanceData.currentAttendace : 'absent';
   }
 
   const handleAttendanceChange = (attendanceData) => {
     const filteredList = attendanceList.filter(
       (item) => item.employeeId !== attendanceData.employeeId
     );
+
+    console.log(filteredList);
     setAttendanceList([...filteredList, attendanceData]);
   };
 
@@ -57,6 +59,7 @@ const Attendance = () => {
       'ATTENDANCE_LIST',
       JSON.stringify(attendanceList)
     );
+
     setOpenDialog(true);
   };
 
@@ -64,13 +67,15 @@ const Attendance = () => {
     setOpenDialog(false);
   };
 
+  console.log(attendanceList)
+
   return (
     <AttendanceWrapper>
       <HeadingWrapper>
         <Controls.BaseTypography
           mt={2}
           variant="subtitle1"
-          text={`Total Employees: ${employeeData?.length}`}
+          text={`Total Employees: ${employeeData?.length || 0}`}
         />
         <Controls.BaseTypography
           mt={2}
@@ -91,13 +96,12 @@ const Attendance = () => {
         </SearchBox>
         <ButtonBox mr={'10rem'}>
           <Controls.BaseButton
-            text="Submit"
+            text="Save"
             onClick={handleSubmitAttendance}
           />
         </ButtonBox>
       </Box>
       <EmployeeList pl={2} mt={5}>
-        {/* FIXME: */}
         {employeeData?.map((item) => (
           <Components.AttendanceList
             key={item.employeeId}

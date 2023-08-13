@@ -2,9 +2,14 @@ import React from 'react';
 import { CustomButton } from './baseButton.styles';
 
 const BaseButton = (props) => {
-  const { text, onClick, ...others } = props;
+  const { text, color, onClick, ...others } = props;
   return (
-    <CustomButton variant="contained" onClick={onClick} {...others}>
+    <CustomButton
+      variant="contained"
+      color={color}
+      onClick={onClick}
+      {...others}
+    >
       {text}
     </CustomButton>
   );

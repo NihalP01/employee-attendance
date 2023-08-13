@@ -26,14 +26,19 @@ const AttendanceList = (props) => {
     }
   };
 
-  const handleAttendanceChange = (value) => {
-    setAttendanceValue(value);
+  const handleAttendanceChange = (status) => {
+    setAttendanceValue(status);
 
     const attendanceData = {
       employeeId,
       employeeName,
-      attendanceValue: value,
-      attendanceDate,
+      attendanceDays: [
+        {
+          status,
+          attendanceDate,
+        },
+      ],
+      currentAttendace: status,
     };
     onAttendanceChange(attendanceData);
   };
@@ -49,6 +54,7 @@ const AttendanceList = (props) => {
       <Grid item xs={2}>
         <Controls.BaseSelect
           options={attendance}
+          defaultValue="absent"
           value={attendanceValue}
           onChange={(e) => handleAttendanceChange(e.target.value)}
         />

@@ -13,7 +13,7 @@ export const tableHeader = [
   },
   {
     id: 3,
-    value: 'Total worked',
+    value: 'Total working days',
   },
   {
     id: 4,
@@ -83,26 +83,25 @@ export const employeeListTableHeader = [
   },
 ];
 
-export const employeesListTableRows = [
+export const editEmployeeTableHeader = [
   {
     id: 0,
-    name: 'Nihal Buragohain',
-    designation: 'welder',
-    address: 'Panibil, Sibsagar',
-    phoneNumber: '7002028029',
+    value: 'Name',
+  },
+  {
+    id: 1,
+    value: 'Designation',
   },
   {
     id: 2,
-    name: 'Nihal Buragohain',
-    designation: 'welder',
-    address: 'Panibil, Sibsagar',
-    phoneNumber: '7002028029',
+    value: 'Wage'
   },
   {
     id: 3,
-    name: 'Nihal Buragohain',
-    designation: 'welder',
-    address: 'Panibil, Sibsagar',
-    phoneNumber: '7002028029',
+    value: 'Address',
   },
-];
+  {
+    id: 4,
+    value: 'Phone Number',
+  },
+]
