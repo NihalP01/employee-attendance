@@ -31,7 +31,7 @@ const Attendance = () => {
   function attendanceCount() {
     let presentCount = 0;
     for (const attendance of attendanceList) {
-      if (attendance.attendanceValue === 'present') {
+      if (attendance.currentAttendance === 'present') {
         presentCount++;
       }
     }
@@ -42,10 +42,12 @@ const Attendance = () => {
     const attendanceData = attendanceList.find(
       (attendance) => attendance.employeeId === employeeId
     );
-    return attendanceData ? attendanceData.currentAttendance : 'absent';
+    return attendanceData
+      ? attendanceData.currentAttendance
+      : 'absent';
   }
 
-  console.log(attendanceList)
+  console.log(attendanceList);
 
   const handleAttendanceChange = (attendanceData) => {
     const filteredList = attendanceList.filter(
@@ -53,6 +55,7 @@ const Attendance = () => {
     );
     setAttendanceList([...filteredList, attendanceData]);
   };
+  
 
   const handleSubmitAttendance = () => {
     localStorage.setItem(
@@ -66,7 +69,6 @@ const Attendance = () => {
   const handleDialogButtonClick = () => {
     setOpenDialog(false);
   };
-
 
   return (
     <AttendanceWrapper>

@@ -6,10 +6,16 @@ import { attendance } from '../../constants/selectConst';
 import { Utils } from '../../utils/Utils';
 
 const AttendanceList = (props) => {
-  const { employeeId, employeeName, attendanceStatus, onAttendanceChange } =
-    props;
+  const {
+    employeeId,
+    employeeName,
+    attendanceStatus,
+    onAttendanceChange,
+  } = props;
 
-  const [attendanceValue, setAttendanceValue] = useState(attendanceStatus);
+  const attendanceDate = Utils.formattedDate(new Date());
+  const [attendanceValue, setAttendanceValue] =
+    useState(attendanceStatus);
   const [dailyAttendance, setDailyAttendance] = useState([]);
 
   const listcolor = () => {
@@ -22,8 +28,6 @@ const AttendanceList = (props) => {
 
   const handleAttendanceChange = (status) => {
     setAttendanceValue(status);
-    const attendanceDate = Utils.formattedDate;
-    console.log(attendanceDate)
     const updatedDailyAttendance = [
       ...dailyAttendance,
       {
@@ -46,7 +50,10 @@ const AttendanceList = (props) => {
   return (
     <GridWrapper listcolor={listcolor()} mt={1} container spacing={2}>
       <Grid display={'flex'} alignItems={'center'} item xs={6}>
-        <Controls.BaseTypography variant="subtitle2" text={employeeName} />
+        <Controls.BaseTypography
+          variant="subtitle2"
+          text={employeeName}
+        />
       </Grid>
       <Grid item xs={2}>
         <Controls.BaseSelect
