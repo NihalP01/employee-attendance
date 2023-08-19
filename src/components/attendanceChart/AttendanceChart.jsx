@@ -1,15 +1,22 @@
 import { Box, Divider, IconButton } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ButtonBox, GridContainer, GridItem } from './attendanceChart.styles';
 import { Controls } from '../controls';
 import { STATIC_ASSETS } from '../../global/staticAssets';
 
 const AttendanceChart = () => {
-  const num = 31;
+  const [attendanceChart, setAttendanceChart] = useState([]);
 
   const handlePrint = () => {
     window.print();
   };
+
+  useEffect(() => {
+    setAttendanceChart(JSON.parse(localStorage.getItem('ATTENDANCE_LIST')));
+  }, []);
+
+  console.log(attendanceChart);
+
   return (
     <Box>
       <Box
@@ -28,8 +35,13 @@ const AttendanceChart = () => {
         </Box>
       </Box>
       <GridContainer container>
-        {Array.from(Array(num), (_, index) => (
+        {/* {Array.from(Array(num), (_, index) => (
           <GridItem isPresent={true} key={index} item xs={1}>
+            {index + 1}
+          </GridItem>
+        ))} */}
+        {attendanceChart.map((item, index) => (
+          <GridItem isPresent={true} key={item.employeeId} item xs={1}>
             {index + 1}
           </GridItem>
         ))}

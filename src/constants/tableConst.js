@@ -13,10 +13,6 @@ export const tableHeader = [
   },
   {
     id: 3,
-    value: 'Total working days',
-  },
-  {
-    id: 4,
     value: 'Payable Amount',
   },
 ];
@@ -94,7 +90,7 @@ export const editEmployeeTableHeader = [
   },
   {
     id: 2,
-    value: 'Wage'
+    value: 'Wage',
   },
   {
     id: 3,
@@ -104,4 +100,4 @@ export const editEmployeeTableHeader = [
     id: 4,
     value: 'Phone Number',
   },
-]
+];
