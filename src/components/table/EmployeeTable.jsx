@@ -10,8 +10,10 @@ const EmployeeTable = () => {
   const [open, setOpen] = useState(false);
   const [employeeList, setEmployeeList] = useState([]);
   const [attendanceChart, setAttendanceChart] = useState([]);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
-  const handleClick = (id) => {
+  const handleClick = (item) => {
+    setSelectedEmployee(item);
     setOpen(true);
   };
 
@@ -21,7 +23,7 @@ const EmployeeTable = () => {
   }, []);
 
   const getAttendanceCount = (id, status) => {
-    const attendance = attendanceChart.find((e) => e.id === id);
+    const attendance = attendanceChart?.find((e) => e.id === id);
     const presentAbsentDays = attendance?.attendance?.filter(
       (a) => a.status === status
     ).length;
@@ -32,7 +34,7 @@ const EmployeeTable = () => {
   };
 
   const getPayableAmount = (id) => {
-    const attendance = attendanceChart.find((e) => e.id === id);
+    const attendance = attendanceChart?.find((e) => e.id === id);
     const employee = employeeList.find((e) => e.employeeId === id);
     const presentAbsentDays = attendance?.attendance?.filter(
       (a) => a.status === 'present'
@@ -67,7 +69,7 @@ const EmployeeTable = () => {
               <TableCell>{getPayableAmount(item.employeeId)}</TableCell>
               <TableCell>
                 <Controls.BaseButton
-                  onClick={() => handleClick(item.id)}
+                  onClick={() => handleClick(item)}
                   text="View Details"
                 />
               </TableCell>
@@ -76,13 +78,26 @@ const EmployeeTable = () => {
         </TableBody>
       </TableBox>
 
-      <Components.CustomDialog
-        open={open}
-        title="Joe Smith, welder"
-        setOpen={setOpen}
-      >
-        <AttendanceChart />
-      </Components.CustomDialog>
+      {selectedEmployee && (
+        <Components.CustomDialog
+          open={open}
+          title={`${selectedEmployee.employeeName}, ${selectedEmployee.employeeDesignation}`}
+          setOpen={setOpen}
+          maxWidth={40}
+        >
+          <AttendanceChart
+            employeeDetails={selectedEmployee}
+            presentDays={getAttendanceCount(
+              selectedEmployee.employeeId,
+              'present'
+            )}
+            absentDays={getAttendanceCount(
+              selectedEmployee.employeeId,
+              'absent'
+            )}
+          />
+        </Components.CustomDialog>
+      )}
     </Box>
   );
 };

@@ -77,7 +77,6 @@ const Attendance = () => {
     });
   };
 
-  console.log(attendanceList);
 
   const handleSubmitAttendance = () => {
     localStorage.setItem('ATTENDANCE_LIST', JSON.stringify(attendanceList));

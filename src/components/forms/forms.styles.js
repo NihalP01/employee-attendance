@@ -8,3 +8,12 @@ export const EditEmployeeFormBoxWrapper = styled(Box)(() => ({
   justifyContent: 'center',
   alignItems: 'center',
 }));
+
+export const ButtonBox = styled(Box)(() => ({
+  maxWidth: '170px',
+  marginTop: '0.7rem',
+  marginBottom: '0.1rem',
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginLeft: 'auto',
+}));
