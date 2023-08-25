@@ -3,6 +3,8 @@
 -> Implement Update employee, Remove employee -->
 
 # Employee Management System with Attendance Tracking
+## Note
+This is still in development phase
 
 ## Features
 
