@@ -21,3 +21,5 @@ This is still in development phase
 ## Demo: 
 
 [Click here](https://sigmasteel-employee-management.netlify.app)
+
+--Only Desktop 🖥️ view is available currently.
