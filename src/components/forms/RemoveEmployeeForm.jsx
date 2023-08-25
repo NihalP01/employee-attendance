@@ -43,13 +43,13 @@ const RemoveEmployeeForm = () => {
 
   return (
     <BoxWrapper>
-      {employeeList.length === 0 ? (
+      {employeeList?.length === 0 ? (
         <Controls.BaseTypography mt={4} text="No data available" />
       ) : (
         <Table>
           <TableHead>
             <TableRow>
-              {editEmployeeTableHeader.map((item) => (
+              {editEmployeeTableHeader?.map((item) => (
                 <TableCell key={item.id}>{item.value}</TableCell>
               ))}
               <TableCell></TableCell>
@@ -57,7 +57,7 @@ const RemoveEmployeeForm = () => {
           </TableHead>
 
           <TableBody>
-            {employeeList.map((item) => (
+            {employeeList?.map((item) => (
               <TableRow key={item.employeeId}>
                 <TableCell>{item.employeeName}</TableCell>
                 <TableCell>{item.employeeDesignation}</TableCell>

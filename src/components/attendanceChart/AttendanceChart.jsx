@@ -18,7 +18,7 @@ const AttendanceChart = (props) => {
 
   console.log(attendanceList)
 
-  const attendance = attendanceList.find(
+  const attendance = attendanceList?.find(
     (item) => item.id === employeeDetails.employeeId
   );
   const attendanceChart = attendance?.attendance;

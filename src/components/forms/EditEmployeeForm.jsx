@@ -87,11 +87,11 @@ const EditEmployeeForm = () => {
             <TableCell></TableCell>
           </TableRow>
         </TableHead>
-        {employeeList.length === 0 ? (
+        {employeeList?.length === 0 ? (
           <Controls.BaseTypography mt={4} text="No data available" />
         ) : (
           <TableBody>
-            {employeeList.map((item) => (
+            {employeeList?.map((item) => (
               <TableRow key={item.employeeId}>
                 <TableCell>
                   {editingRows[item.employeeId] ? (
