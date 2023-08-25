@@ -57,7 +57,7 @@ const EmployeeTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {employeeList.map((item) => (
+          {employeeList?.map((item) => (
             <StyledTableRow key={item.employeeId}>
               <TableCell>{item.employeeName}</TableCell>
               <TableCell>
