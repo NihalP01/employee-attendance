@@ -35,7 +35,7 @@ const EmployeeTable = () => {
 
   const getPayableAmount = (id) => {
     const attendance = attendanceChart?.find((e) => e.id === id);
-    const employee = employeeList.find((e) => e.employeeId === id);
+    const employee = employeeList?.find((e) => e.employeeId === id);
     const presentAbsentDays = attendance?.attendance?.filter(
       (a) => a.status === 'present'
     ).length;
