@@ -9,6 +9,7 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import CloseIcon from '@mui/icons-material/Close';
 
 const [
   DASHBOARD_ICON,
@@ -22,6 +23,7 @@ const [
   PAYMENT_ICON,
   ARROW_NEXT,
   ARROW_PREV,
+  CLOSE_ICON,
 ] = [
   DashboardIcon,
   EngineeringIcon,
@@ -34,6 +36,7 @@ const [
   CurrencyRupeeIcon,
   ArrowRightIcon,
   ArrowLeftIcon,
+  CloseIcon,
 ];
 
 export const STATIC_ASSETS = {
@@ -48,4 +51,5 @@ export const STATIC_ASSETS = {
   PAYMENT_ICON,
   ARROW_NEXT,
   ARROW_PREV,
+  CLOSE_ICON,
 };

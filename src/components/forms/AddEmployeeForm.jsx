@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { BoxWrapper } from './forms.styles';
+import { BoxWrapper, ButtonBox } from './forms.styles';
 import { Divider, Grid } from '@mui/material';
 import { Controls } from '../controls/index';
-import { ButtonBox } from '../attendanceChart/attendanceChart.styles';
+
 
 const AddEmployeeForm = ({ setOpen }) => {
   const uniqueID = new Date().getTime();
@@ -53,8 +53,7 @@ const AddEmployeeForm = ({ setOpen }) => {
     }
 
     if (formData.employeePhoneNumber.trim() === '') {
-      errors.employeePhoneNumber =
-        'Employee phone number is required';
+      errors.employeePhoneNumber = 'Employee phone number is required';
     }
 
     setFormErrors(errors);
@@ -70,10 +69,7 @@ const AddEmployeeForm = ({ setOpen }) => {
         JSON.parse(localStorage.getItem('EMPLOYEE_DETAILS')) || [];
       const updatedData = [...existedData, formData];
 
-      localStorage.setItem(
-        'EMPLOYEE_DETAILS',
-        JSON.stringify(updatedData)
-      );
+      localStorage.setItem('EMPLOYEE_DETAILS', JSON.stringify(updatedData));
       setOpen(false);
     }
   };
@@ -88,18 +84,13 @@ const AddEmployeeForm = ({ setOpen }) => {
             type="text"
             sx={{ marginTop: 0.6 }}
             value={formData.employeeName}
-            onChange={(e) =>
-              handleFormChange('employeeName', e.target.value)
-            }
+            onChange={(e) => handleFormChange('employeeName', e.target.value)}
             error={Boolean(formErrors.employeeName)}
             helperText={formErrors.employeeName}
           />
         </Grid>
         <Grid item xs={6}>
-          <Controls.BaseTypography
-            variant="body3"
-            text="Designation"
-          />
+          <Controls.BaseTypography variant="body3" text="Designation" />
           <Controls.BaseTextField
             placeholder="Welder"
             type="text"
@@ -112,26 +103,18 @@ const AddEmployeeForm = ({ setOpen }) => {
           />
         </Grid>
         <Grid item xs={6}>
-          <Controls.BaseTypography
-            variant="body3"
-            text="Wage per day"
-          />
+          <Controls.BaseTypography variant="body3" text="Wage per day" />
           <Controls.BaseTextField
             type="number"
             placeholder="800"
             sx={{ marginTop: 0.6 }}
-            onChange={(e) =>
-              handleFormChange('employeeWage', e.target.value)
-            }
+            onChange={(e) => handleFormChange('employeeWage', e.target.value)}
             error={Boolean(formErrors.employeeWage)}
             helperText={formErrors.employeeWage}
           />
         </Grid>
         <Grid item xs={6}>
-          <Controls.BaseTypography
-            variant="body3"
-            text="Phone Number"
-          />
+          <Controls.BaseTypography variant="body3" text="Phone Number" />
           <Controls.BaseTextField
             type="number"
             placeholder="7002020202"
@@ -144,10 +127,7 @@ const AddEmployeeForm = ({ setOpen }) => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Controls.BaseTypography
-            variant="body3"
-            text="Employee Address"
-          />
+          <Controls.BaseTypography variant="body3" text="Employee Address" />
           <Controls.BaseTextField
             type="text"
             placeholder="Panibil Jamunamukh, Sibsagar, Assam"

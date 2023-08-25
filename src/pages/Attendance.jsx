@@ -10,6 +10,7 @@ import { Controls } from '../components/controls';
 import { Components } from '../components';
 import { STATIC_ASSETS } from '../global/staticAssets';
 import { Box } from '@mui/material';
+import { Utils } from '../utils/Utils';
 
 const Attendance = () => {
   const [employeeData, setEmployeeData] = useState([]);
@@ -29,37 +30,56 @@ const Attendance = () => {
   }, []);
 
   function attendanceCount() {
-    let presentCount = 0;
-    for (const attendance of attendanceList) {
-      if (attendance.attendanceValue === 'present') {
-        presentCount++;
+    const presentCount = attendanceList.filter(
+      (a) => a.currentStatus === 'present'
+    );
+    return presentCount.length;
+  }
+
+  const onAttendanceChange = (id, name, status) => {
+    const attendanceData = {
+      id,
+      name,
+      currentStatus: status,
+      attendance: [
+        {
+          status,
+          attendanceDate: Utils.formattedDate(),
+        },
+      ],
+    };
+
+    setAttendanceList((prevList) => {
+      const newList = [...prevList];
+      const index = newList.findIndex((item) => item.id === id);
+      if (index === -1) {
+        newList.push(attendanceData);
+      } else {
+        const lastAttendance =
+          newList[index].attendance[newList[index].attendance.length - 1];
+
+        if (
+          lastAttendance.attendanceDate !==
+          attendanceData.attendance[0].attendanceDate
+        ) {
+          newList[index].attendance.push({
+            status: attendanceData.attendance[0].status,
+            attendanceDate: attendanceData.attendance[0].attendanceDate,
+          });
+        }
+        newList[index].currentStatus = status;
+        newList[index].attendance[newList[index].attendance.length - 1] = {
+          status: attendanceData.attendance[0].status,
+          attendanceDate: attendanceData.attendance[0].attendanceDate,
+        };
       }
-    }
-    return presentCount;
-  }
-
-  function getAttendanceStatus(employeeId) {
-    const attendanceData = attendanceList.find(
-      (attendance) => attendance.employeeId === employeeId
-    );
-    return attendanceData ? attendanceData.currentAttendace : 'absent';
-  }
-
-  const handleAttendanceChange = (attendanceData) => {
-    const filteredList = attendanceList.filter(
-      (item) => item.employeeId !== attendanceData.employeeId
-    );
-
-    console.log(filteredList);
-    setAttendanceList([...filteredList, attendanceData]);
+      return newList;
+    });
   };
 
-  const handleSubmitAttendance = () => {
-    localStorage.setItem(
-      'ATTENDANCE_LIST',
-      JSON.stringify(attendanceList)
-    );
 
+  const handleSubmitAttendance = () => {
+    localStorage.setItem('ATTENDANCE_LIST', JSON.stringify(attendanceList));
     setOpenDialog(true);
   };
 
@@ -67,7 +87,13 @@ const Attendance = () => {
     setOpenDialog(false);
   };
 
-  console.log(attendanceList)
+  function getStatus(id) {
+    const attendance = attendanceList.find((a) => a.id === id);
+    if (attendance) {
+      return attendance.currentStatus;
+    }
+    return 'absent';
+  }
 
   return (
     <AttendanceWrapper>
@@ -95,10 +121,7 @@ const Attendance = () => {
           />
         </SearchBox>
         <ButtonBox mr={'10rem'}>
-          <Controls.BaseButton
-            text="Save"
-            onClick={handleSubmitAttendance}
-          />
+          <Controls.BaseButton text="Save" onClick={handleSubmitAttendance} />
         </ButtonBox>
       </Box>
       <EmployeeList pl={2} mt={5}>
@@ -107,8 +130,8 @@ const Attendance = () => {
             key={item.employeeId}
             employeeId={item.employeeId}
             employeeName={item.employeeName}
-            attendanceStatus={getAttendanceStatus(item.employeeId)}
-            onAttendanceChange={handleAttendanceChange}
+            attendanceStatus={getStatus(item.employeeId)}
+            onAttendanceChange={onAttendanceChange}
           />
         ))}
       </EmployeeList>
@@ -124,10 +147,7 @@ const Attendance = () => {
           />
         </Box>
         <Box mt={2} display={'flex'} justifyContent={'center'}>
-          <Controls.BaseButton
-            text="Ok"
-            onClick={handleDialogButtonClick}
-          />
+          <Controls.BaseButton text="Ok" onClick={handleDialogButtonClick} />
         </Box>
       </Components.CustomDialog>
     </AttendanceWrapper>
