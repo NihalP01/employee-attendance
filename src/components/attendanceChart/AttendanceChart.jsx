@@ -16,8 +16,6 @@ const AttendanceChart = (props) => {
     setAttendanceList(JSON.parse(localStorage.getItem('ATTENDANCE_LIST')));
   }, []);
 
-  console.log(attendanceList)
-
   const attendance = attendanceList?.find(
     (item) => item.id === employeeDetails.employeeId
   );

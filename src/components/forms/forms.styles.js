@@ -17,3 +17,7 @@ export const ButtonBox = styled(Box)(() => ({
   justifyContent: 'space-between',
   marginLeft: 'auto',
 }));
+
+export const UpdatePaymentBox = styled(Box)(() => ({
+  
+}));

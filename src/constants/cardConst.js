@@ -25,7 +25,7 @@ export const manageCardPayment = [
   {
     id: 0,
     icon: STATIC_ASSETS.PAYMENT_ICON,
-    value: 'Make payment',
+    value: 'Update Payment',
     color: '#ffffb6',
   },
 ];
