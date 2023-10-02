@@ -3,7 +3,6 @@ import { BoxWrapper, ButtonBox } from './forms.styles';
 import { Divider, Grid } from '@mui/material';
 import { Controls } from '../controls/index';
 
-
 const AddEmployeeForm = ({ setOpen }) => {
   const uniqueID = new Date().getTime();
 
@@ -22,6 +21,7 @@ const AddEmployeeForm = ({ setOpen }) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [field]: value,
+      amountTaken: [],
     }));
 
     setFormErrors((prevFormErrors) => ({

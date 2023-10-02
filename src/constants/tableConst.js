@@ -101,3 +101,18 @@ export const editEmployeeTableHeader = [
     value: 'Phone Number',
   },
 ];
+
+export const payableConst = [
+  {
+    id: 0,
+    value: 'Name',
+  },
+  {
+    id: 1,
+    value: 'Designation',
+  },
+  {
+    id: 2,
+    value: 'Amount',
+  },
+];

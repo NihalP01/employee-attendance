@@ -77,7 +77,6 @@ const Attendance = () => {
     });
   };
 
-
   const handleSubmitAttendance = () => {
     localStorage.setItem('ATTENDANCE_LIST', JSON.stringify(attendanceList));
     setOpenDialog(true);

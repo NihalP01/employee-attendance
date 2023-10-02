@@ -40,7 +40,17 @@ const EmployeeTable = () => {
       (a) => a.status === 'present'
     ).length;
     if (attendance) {
-      return `${presentAbsentDays * employee.employeeWage} ₹`;
+      let totalPayable = presentAbsentDays * employee.employeeWage;
+      if (employee.amountTaken) {
+        const amountTaken = employee.amountTaken?.reduce(
+          (total, item) => total + Number(item.amount),
+          0
+        );
+        totalPayable -= amountTaken;
+        return `${totalPayable} ₹`;
+      } else {
+        return `${totalPayable} ₹`;
+      }
     }
     return 0;
   };
